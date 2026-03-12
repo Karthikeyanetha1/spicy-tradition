@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Spicy Tradition | Authentic Telangana Cuisine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --saffron:#e8800a;
+  --deep:#1a0a00;
+  --cream:#fdf6ec;
+  --warm:#f5ede0;
+  --text:#2c1a0e;
+  --muted:#9a7c6a;
+  --border:#e8d5c0;
+  --green:#2d6a2d;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:72px;
+  background:rgba(253,246,236,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:all .3s;
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;color:var(--text);
+}
+.logo span{color:var(--saffron)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{
+  color:var(--text);text-decoration:none;
+  font-size:13px;font-weight:500;letter-spacing:.5px;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--saffron)}
+.nav-actions{display:flex;align-items:center;gap:16px}
+.nav-phone{
+  font-size:13px;font-weight:600;color:var(--text);
+  text-decoration:none;transition:color .2s;
+}
+.nav-phone:hover{color:var(--saffron)}
+.nav-btn{
+  background:var(--saffron);color:#fff;
+  padding:10px 24px;font-size:12px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;transition:all .2s;
+}
+.nav-btn:hover{background:#c96d08;transform:translateY(-1px)}
+
+/* HERO */
+.hero{
+  min-height:100vh;padding-top:72px;
+  background:var(--deep);
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 60%,rgba(232,128,10,0.12) 0%,transparent 60%);
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 60px;position:relative;z-index:1;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(232,128,10,0.12);border:1px solid rgba(232,128,10,0.25);
+  padding:7px 16px;border-radius:20px;width:fit-content;margin-bottom:32px;
+}
+.hero-tag span{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--saffron)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,6vw,88px);
+  font-weight:900;line-height:1.05;
+  color:#fff;margin-bottom:24px;
+}
+.hero h1 em{font-style:italic;color:var(--saffron)}
+.hero-sub{
+  font-size:16px;color:rgba(255,255,255,0.45);
+  line-height:1.8;max-width:420px;margin-bottom:44px;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+.btn-saffron{
+  background:var(--saffron);color:#fff;padding:15px 36px;
+  font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;transition:all .2s;display:inline-block;
+}
+.btn-saffron:hover{background:#c96d08;transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,128,10,0.3)}
+.btn-outline-w{
+  border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);
+  padding:15px 32px;font-size:13px;font-weight:600;
+  text-decoration:none;border-radius:2px;transition:all .2s;display:inline-block;
+}
+.btn-outline-w:hover{border-color:#fff;color:#fff}
+.hero-badges{display:flex;gap:32px}
+.hbadge{text-align:center}
+.hbadge-num{
+  font-family:'Playfair Display',serif;
+  font-size:36px;font-weight:900;color:#fff;line-height:1;
+}
+.hbadge-num span{color:var(--saffron)}
+.hbadge-txt{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+.hero-right{
+  display:flex;align-items:center;justify-content:center;
+  position:relative;padding:60px 40px;
+}
+.food-showcase{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  width:100%;max-width:460px;position:relative;z-index:1;
+}
+.food-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:4px;padding:28px 20px;
+  text-align:center;transition:all .3s;cursor:default;
+}
+.food-card:hover{background:rgba(232,128,10,0.08);border-color:rgba(232,128,10,0.2);transform:translateY(-4px)}
+.food-card.big{grid-column:span 2;padding:32px}
+.food-emoji{font-size:48px;margin-bottom:12px;display:block}
+.food-name{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;
+}
+.food-price{font-size:13px;color:var(--saffron);font-weight:600}
+
+/* MARQUEE */
+.marquee{background:var(--saffron);padding:12px 0;overflow:hidden}
+.marquee-track{display:flex;animation:marquee 20s linear infinite;white-space:nowrap}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.marquee-item{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-style:italic;color:#fff;
+  padding:0 32px;flex-shrink:0;
+  display:flex;align-items:center;gap:32px;
+}
+.m-dot{width:4px;height:4px;background:rgba(255,255,255,0.4);border-radius:50%;flex-shrink:0}
+
+/* SECTIONS */
+.section{padding:100px 60px}
+.sec-eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--saffron);margin-bottom:14px;
+}
+.sec-eyebrow::before{content:'';width:24px;height:2px;background:var(--saffron)}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,4.5vw,64px);font-weight:900;
+  line-height:1.05;color:var(--text);
+}
+.sec-title em{font-style:italic;color:var(--saffron)}
+.sec-sub{font-size:15px;color:var(--muted);line-height:1.8;max-width:500px;margin-top:14px}
+
+/* MENU */
+.menu-section{background:var(--cream)}
+.menu-tabs{
+  display:flex;gap:4px;margin:48px 0 40px;flex-wrap:wrap;
+}
+.tab{
+  padding:10px 24px;font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  border:1.5px solid var(--border);color:var(--muted);
+  background:transparent;cursor:pointer;transition:all .2s;border-radius:2px;
+}
+.tab.active,.tab:hover{background:var(--saffron);border-color:var(--saffron);color:#fff}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.menu-item{
+  background:#fff;padding:32px 28px;
+  display:flex;gap:20px;align-items:flex-start;
+  transition:all .3s;cursor:default;
+  border-bottom:2px solid transparent;
+}
+.menu-item:hover{border-bottom-color:var(--saffron);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.06)}
+.menu-emoji{font-size:36px;flex-shrink:0}
+.menu-info{flex:1}
+.menu-name{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;margin-bottom:6px;
+}
+.menu-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.menu-footer{display:flex;justify-content:space-between;align-items:center}
+.menu-price{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:900;color:var(--saffron);
+}
+.menu-tag{
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 8px;background:var(--warm);color:var(--muted);border-radius:2px;
+}
+.menu-tag.veg{background:#e8f5e9;color:var(--green)}
+.menu-tag.spicy{background:#fde8e8;color:#c0392b}
+
+/* ABOUT */
+.about-section{
+  background:var(--deep);
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.about-left{
+  padding:100px 60px;display:flex;flex-direction:column;justify-content:center;
+}
+.about-left .sec-title{color:#fff}
+.about-left .sec-eyebrow{color:var(--saffron)}
+.about-left .sec-sub{color:rgba(255,255,255,0.4);margin-bottom:40px}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:48px}
+.astat{
+  background:rgba(255,255,255,0.03);
+  padding:28px 24px;border:1px solid rgba(255,255,255,0.05);
+  transition:background .3s;
+}
+.astat:hover{background:rgba(232,128,10,0.08)}
+.astat-num{
+  font-family:'Playfair Display',serif;
+  font-size:42px;font-weight:900;color:#fff;line-height:1;margin-bottom:6px;
+}
+.astat-num span{color:var(--saffron)}
+.astat-label{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase}
+.about-right{
+  background:rgba(255,255,255,0.02);
+  padding:80px 60px;display:flex;flex-direction:column;justify-content:center;gap:28px;
+}
+.story-block{
+  padding:28px 24px;
+  border-left:3px solid rgba(232,128,10,0.3);
+  transition:border-color .3s;
+}
+.story-block:hover{border-left-color:var(--saffron)}
+.story-year{
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--saffron);margin-bottom:8px;
+}
+.story-text{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7}
+
+/* SPECIALS */
+.specials-section{background:var(--warm)}
+.specials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-top:56px}
+.special-card{
+  background:#fff;overflow:hidden;position:relative;
+  transition:transform .3s;cursor:default;
+}
+.special-card:hover{transform:translateY(-4px)}
+.special-visual{
+  height:200px;display:flex;align-items:center;
+  justify-content:center;font-size:72px;position:relative;
+}
+.sv1{background:linear-gradient(135deg,#2c1a0e,#4a2c10)}
+.sv2{background:linear-gradient(135deg,#1a2c1a,#2a4a1a)}
+.sv3{background:linear-gradient(135deg,#1a1a2c,#1a2a4a)}
+.sv4{background:linear-gradient(135deg,#2c1a1a,#4a1a1a)}
+.special-badge{
+  position:absolute;top:16px;right:16px;
+  background:var(--saffron);color:#fff;
+  font-size:10px;font-weight:700;letter-spacing:1px;
+  padding:4px 10px;text-transform:uppercase;border-radius:2px;
+}
+.special-info{padding:24px 28px}
+.special-name{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;margin-bottom:6px;
+}
+.special-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.special-footer{display:flex;justify-content:space-between;align-items:center}
+.special-price{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;color:var(--saffron);
+}
+.special-order{
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--text);text-decoration:none;
+  display:flex;align-items:center;gap:6px;transition:color .2s;
+}
+.special-order:hover{color:var(--saffron)}
+
+/* TESTIMONIALS */
+.testimonials-section{background:var(--cream)}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px}
+.t-card{
+  background:#fff;padding:36px 28px;
+  position:relative;transition:all .3s;
+}
+.t-card:hover{background:var(--deep);transform:translateY(-4px)}
+.t-card:hover .t-text,.t-card:hover .t-name{color:#fff}
+.t-card:hover .t-role{color:rgba(255,255,255,0.35)}
+.t-stars{color:var(--saffron);font-size:13px;letter-spacing:2px;margin-bottom:16px}
+.t-text{
+  font-size:14px;line-height:1.8;color:var(--text);
+  font-style:italic;margin-bottom:24px;transition:color .3s;
+}
+.t-name{font-weight:700;font-size:14px;transition:color .3s}
+.t-role{font-size:12px;color:var(--muted);margin-top:2px;transition:color .3s}
+.t-verified{
+  position:absolute;top:20px;right:20px;
+  background:rgba(0,128,0,0.08);color:var(--green);
+  font-size:10px;font-weight:700;padding:3px 8px;border-radius:2px;
+}
+
+/* CONTACT */
+.contact-section{
+  background:var(--deep);
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.contact-left{padding:100px 60px;display:flex;flex-direction:column;justify-content:center}
+.contact-left .sec-title{color:#fff;margin-bottom:40px}
+.contact-left .sec-eyebrow{color:var(--saffron)}
+.contact-details{display:flex;flex-direction:column;gap:24px;margin-bottom:48px}
+.c-row{display:flex;gap:16px;align-items:flex-start}
+.c-icon{
+  width:44px;height:44px;background:rgba(232,128,10,0.12);
+  border:1px solid rgba(232,128,10,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;border-radius:2px;
+}
+.c-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:4px}
+.c-val{font-size:14px;font-weight:600;color:#fff;line-height:1.5}
+.c-val a{color:#fff;text-decoration:none;transition:color .2s}
+.c-val a:hover{color:var(--saffron)}
+.social-row{display:flex;gap:10px;margin-top:8px}
+.soc-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.6);font-size:12px;font-weight:600;
+  text-decoration:none;border-radius:2px;transition:all .2s;
+}
+.soc-btn:hover{background:var(--saffron);border-color:var(--saffron);color:#fff}
+
+/* FORM */
+.contact-right{
+  background:rgba(255,255,255,0.02);
+  padding:100px 60px;display:flex;flex-direction:column;justify-content:center;
+}
+.form-title{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:700;color:#fff;margin-bottom:32px;
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-field{display:flex;flex-direction:column;gap:8px}
+.form-field.full{grid-column:span 2}
+.form-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.form-input,.form-textarea{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  color:#fff;padding:14px 16px;font-size:14px;
+  font-family:'DM Sans',sans-serif;
+  border-radius:2px;outline:none;transition:all .2s;
+}
+.form-input:focus,.form-textarea:focus{border-color:var(--saffron);background:rgba(232,128,10,0.05)}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.2)}
+.form-textarea{resize:vertical;min-height:120px}
+.form-submit{
+  background:var(--saffron);color:#fff;padding:16px 36px;
+  font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  border:none;cursor:pointer;border-radius:2px;
+  transition:all .2s;width:100%;margin-top:8px;
+}
+.form-submit:hover{background:#c96d08;transform:translateY(-2px)}
+.form-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.form-msg{
+  margin-top:14px;padding:12px 16px;border-radius:2px;
+  font-size:13px;font-weight:600;display:none;
+}
+.form-msg.success{background:rgba(0,128,0,0.12);color:#2d8a2d;border:1px solid rgba(0,128,0,0.2)}
+.form-msg.error{background:rgba(200,0,0,0.1);color:#c00;border:1px solid rgba(200,0,0,0.2)}
+
+/* HOURS */
+.hours-section{background:var(--warm);padding:80px 60px}
+.hours-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:48px}
+.hour-card{background:#fff;padding:32px 24px;text-align:center;transition:all .3s}
+.hour-card:hover{background:var(--saffron)}
+.hour-card:hover .hour-day,.hour-card:hover .hour-time{color:#fff}
+.hour-day{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;margin-bottom:8px;transition:color .3s;
+}
+.hour-time{font-size:13px;color:var(--muted);font-weight:500;transition:color .3s}
+.hour-card.closed .hour-time{color:#e74c3c}
+
+/* CTA */
+.cta-section{
+  background:var(--saffron);padding:100px 60px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'🍛';font-size:300px;
+  position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+  opacity:0.06;pointer-events:none;
+}
+.cta-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,6vw,80px);font-weight:900;
+  color:#fff;line-height:1.05;margin-bottom:20px;
+}
+.cta-sub{color:rgba(255,255,255,0.7);font-size:16px;margin-bottom:40px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-white{
+  background:#fff;color:var(--saffron);padding:16px 40px;
+  font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;transition:all .2s;
+}
+.btn-white:hover{background:var(--deep);color:#fff}
+.btn-outline-wh{
+  border:2px solid rgba(255,255,255,0.5);color:#fff;padding:16px 36px;
+  font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;transition:all .2s;
+}
+.btn-outline-wh:hover{border-color:#fff;background:rgba(255,255,255,0.1)}
+
+/* FOOTER */
+footer{background:#0e0600;padding:60px;border-top:1px solid rgba(255,255,255,0.04)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;color:#fff;margin-bottom:16px;
+}
+.footer-logo span{color:var(--saffron)}
+.footer-desc{font-size:13px;color:rgba(255,255,255,0.25);line-height:1.8;max-width:240px}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.25);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:28px;border-top:1px solid rgba(255,255,255,0.05);
+  flex-wrap:wrap;gap:12px;
+}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.18);line-height:1.6}
+.footer-copy a{color:var(--saffron);text-decoration:none}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:all .6s cubic-bezier(.16,1,.3,1)}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:60px 20px}
+  .hero-right{display:none}
+  .section{padding:72px 20px}
+  .menu-grid{grid-template-columns:1fr}
+  .about-section,.contact-section{grid-template-columns:1fr}
+  .about-left,.contact-left,.contact-right{padding:72px 20px}
+  .about-right{padding:60px 20px}
+  .specials-grid,.t-grid{grid-template-columns:1fr}
+  .hours-grid{grid-template-columns:repeat(2,1fr)}
+  .cta-section{padding:72px 20px}
+  footer{padding:48px 20px}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .form-field.full{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Spicy <span>Tradition</span></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:+918688496208" class="nav-phone">📞 +91 86884 96208</a>
+    <a href="https://wa.me/918688496208" target="_blank" class="nav-btn">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><span>🌶️ Authentic Telangana Cuisine</span></div>
+    <h1>The Taste of<br/><em>Tradition</em><br/>Lives Here</h1>
+    <p class="hero-sub">Every dish at Spicy Tradition is crafted with age-old Telangana recipes, fresh local spices, and a love for authentic flavour that no menu can fully describe.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-saffron">View Our Menu</a>
+      <a href="https://wa.me/918688496208?text=Hi! I'd like to make a reservation at Spicy Tradition" target="_blank" class="btn-outline-w">Reserve a Table</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hbadge"><div class="hbadge-num">12<span>+</span></div><div class="hbadge-txt">Years Serving</div></div>
+      <div class="hbadge"><div class="hbadge-num">50<span>+</span></div><div class="hbadge-txt">Dishes</div></div>
+      <div class="hbadge"><div class="hbadge-num">4.8<span>★</span></div><div class="hbadge-txt">Google Rating</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="food-showcase">
+      <div class="food-card big"><span class="food-emoji">🍛</span><div class="food-name">Gongura Mutton</div><div class="food-price">₹320</div></div>
+      <div class="food-card"><span class="food-emoji">🍗</span><div class="food-name">Chicken Fry</div><div class="food-price">₹280</div></div>
+      <div class="food-card"><span class="food-emoji">🥘</span><div class="food-name">Pesarattu</div><div class="food-price">₹120</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">Gongura Mutton<span class="m-dot"></span></div>
+    <div class="marquee-item">Hyderabadi Biryani<span class="m-dot"></span></div>
+    <div class="marquee-item">Pesarattu<span class="m-dot"></span></div>
+    <div class="marquee-item">Mirchi Bajji<span class="m-dot"></span></div>
+    <div class="marquee-item">Royyala Iguru<span class="m-dot"></span></div>
+    <div class="marquee-item">Sakinalu<span class="m-dot"></span></div>
+    <div class="marquee-item">Gongura Mutton<span class="m-dot"></span></div>
+    <div class="marquee-item">Hyderabadi Biryani<span class="m-dot"></span></div>
+    <div class="marquee-item">Pesarattu<span class="m-dot"></span></div>
+    <div class="marquee-item">Mirchi Bajji<span class="m-dot"></span></div>
+    <div class="marquee-item">Royyala Iguru<span class="m-dot"></span></div>
+    <div class="marquee-item">Sakinalu<span class="m-dot"></span></div>
+  </div>
+</div>
+
+<!-- MENU -->
+<section class="section menu-section" id="menu">
+  <div class="sec-eyebrow reveal">Our Menu</div>
+  <div class="sec-title reveal">Authentic <em>Telangana</em><br/>Flavours</div>
+  <div class="menu-tabs reveal">
+    <button class="tab active" onclick="filterMenu('all',this)">All Items</button>
+    <button class="tab" onclick="filterMenu('main',this)">Main Course</button>
+    <button class="tab" onclick="filterMenu('starter',this)">Starters</button>
+    <button class="tab" onclick="filterMenu('biryani',this)">Biryani</button>
+    <button class="tab" onclick="filterMenu('dessert',this)">Desserts</button>
+  </div>
+  <div class="menu-grid" id="menuGrid">
+    <div class="menu-item reveal" data-cat="main">
+      <div class="menu-emoji">🍛</div>
+      <div class="menu-info">
+        <div class="menu-name">Gongura Mutton Curry</div>
+        <div class="menu-desc">Slow-cooked mutton with fresh gongura leaves, village spices and tamarind. A Telangana signature dish.</div>
+        <div class="menu-footer"><div class="menu-price">₹320</div><div class="menu-tag spicy">🌶️ Spicy</div></div>
+      </div>
+    </div>
+    <div class="menu-item reveal" data-cat="starter">
+      <div class="menu-emoji">🍗</div>
+      <div class="menu-info">
+        <div class="menu-name">Kodi Vepudu (Chicken Fry)</div>
+        <div class="menu-desc">Crispy fried chicken marinated overnight in Telangana masala. Served with onion salad and green chutney.</div>
+        <div class="menu-footer"><div class="menu-price">₹280</div><div class="menu-tag spicy">🌶️ Spicy</div></div>
+      </div>
+    </div>
+    <div class="menu-item reveal" data-cat="starter">
+      <div class="menu-emoji">🥞</div>
+      <div class="menu-info">
+        <div class="menu-name">Pesarattu with Upma</div>
+        <div class="menu-desc">Crisp green moong dal crepes served with ginger chutney and stuffed upma. A classic Andhra breakfast.</div>
+        <div class="menu-footer"><div class="menu-price">₹120</div><div class="menu-tag veg">🟢 Veg</div></div>
+      </div>
+    </div>
+    <div class="menu-item reveal" data-cat="biryani">
+      <div class="menu-emoji">🍚</div>
+      <div class="menu-info">
+        <div class="menu-name">Hyderabadi Dum Biryani</div>
+        <div class="menu-desc">Aged basmati rice layered with marinated meat, sealed with dough and slow-cooked on dum for 2 hours.</div>
+        <div class="menu-footer"><div class="menu-price">₹380</div><div class="menu-tag spicy">🌶️ Medium</div></div>
+      </div>
+    </div>
+    <div class="menu-item reveal" data-cat="main">
+      <div class="menu-emoji">🦐</div>
+      <div class="menu-info">
+        <div class="menu-name">Royyala Iguru (Prawn Curry)</div>
+        <div class="menu-desc">Fresh prawns cooked in a rich coconut and red chilli gravy. Pairs perfectly with steamed rice or roti.</div>
+        <div class="menu-footer"><div class="menu-price">₹360</div><div class="menu-tag spicy">🌶️ Spicy</div></div>
+      </div>
+    </div>
+    <div class="menu-item reveal" data-cat="dessert">
+      <div class="menu-emoji">🍮</div>
+      <div class="menu-info">
+        <div class="menu-name">Double Ka Meetha</div>
+        <div class="menu-desc">Bread pudding soaked in saffron milk and garnished with dry fruits. A royal Hyderabadi dessert served warm.</div>
+        <div class="menu-footer"><div class="menu-price">₹140</div><div class="menu-tag veg">🟢 Veg</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-left">
+    <div class="sec-eyebrow">Our Story</div>
+    <div class="sec-title" style="color:#fff">A Family Recipe,<br/><em>A Legacy of Taste</em></div>
+    <div class="sec-sub">Founded in 2012, Spicy Tradition was born out of a grandmother's kitchen in Warangal. Today we bring those same recipes to Hyderabad — unchanged, uncompromised.</div>
+    <div class="about-stats">
+      <div class="astat"><div class="astat-num">12<span>+</span></div><div class="astat-label">Years Running</div></div>
+      <div class="astat"><div class="astat-num">50<span>+</span></div><div class="astat-label">Dishes</div></div>
+      <div class="astat"><div class="astat-num">4.8<span>★</span></div><div class="astat-label">Google Rating</div></div>
+      <div class="astat"><div class="astat-num">1K<span>+</span></div><div class="astat-label">Happy Customers</div></div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="story-block reveal">
+      <div class="story-year">2012 — The Beginning</div>
+      <div class="story-text">Started as a small tiffin centre in Madhapur with just 8 tables and 5 dishes. Within 6 months, the word spread across HITEC City.</div>
+    </div>
+    <div class="story-block reveal">
+      <div class="story-year">2016 — First Expansion</div>
+      <div class="story-text">Opened our full restaurant with a proper dining hall, expanded menu, and our signature Gongura Mutton that became a neighbourhood obsession.</div>
+    </div>
+    <div class="story-block reveal">
+      <div class="story-year">2020 — Going Online</div>
+      <div class="story-text">Launched delivery on Swiggy and Zomato during the pandemic. Maintained a 4.8★ rating throughout with zero compromise on quality.</div>
+    </div>
+    <div class="story-block reveal">
+      <div class="story-year">2024 — Today</div>
+      <div class="story-text">Serving over 300 customers daily. Still using the same recipes from Warangal, still cooking with the same love we started with.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section class="section" id="specials">
+  <div class="sec-eyebrow reveal">Chef's Picks</div>
+  <div class="sec-title reveal">Weekend <em>Specials</em></div>
+  <div class="specials-grid">
+    <div class="special-card reveal">
+      <div class="special-visual sv1"><span>🍛</span><div class="special-badge">Saturday Only</div></div>
+      <div class="special-info">
+        <div class="special-name">Mutton Pulusu Feast</div>
+        <div class="special-desc">A full thali with mutton pulusu, rice, rasam, pappu, pickle and payasam — the complete Telangana meal experience.</div>
+        <div class="special-footer">
+          <div class="special-price">₹450</div>
+          <a href="https://wa.me/918688496208?text=Hi! I want to book the Mutton Pulusu Feast" target="_blank" class="special-order">Order →</a>
+        </div>
+      </div>
+    </div>
+    <div class="special-card reveal">
+      <div class="special-visual sv2"><span>🍲</span><div class="special-badge">Sunday Brunch</div></div>
+      <div class="special-info">
+        <div class="special-name">Village Breakfast Thali</div>
+        <div class="special-desc">Pesarattu, upma, idli, vada, 3 chutneys, filter coffee. An authentic Sunday morning the way our grandparents made it.</div>
+        <div class="special-footer">
+          <div class="special-price">₹180</div>
+          <a href="https://wa.me/918688496208?text=Hi! I want to book Sunday Brunch" target="_blank" class="special-order">Order →</a>
+        </div>
+      </div>
+    </div>
+    <div class="special-card reveal">
+      <div class="special-visual sv3"><span>🦐</span><div class="special-badge">Fri & Sat</div></div>
+      <div class="special-info">
+        <div class="special-name">Seafood Night</div>
+        <div class="special-desc">Fresh catch cooked in Telangana style — prawn fry, fish curry, crab masala. Limited portions, first-come-first-served.</div>
+        <div class="special-footer">
+          <div class="special-price">₹520</div>
+          <a href="https://wa.me/918688496208?text=Hi! I want to reserve Seafood Night" target="_blank" class="special-order">Reserve →</a>
+        </div>
+      </div>
+    </div>
+    <div class="special-card reveal">
+      <div class="special-visual sv4"><span>🎉</span><div class="special-badge">Private Dining</div></div>
+      <div class="special-info">
+        <div class="special-name">Events & Catering</div>
+        <div class="special-desc">Book us for weddings, corporate events, and family gatherings. Custom menus, full catering service across Hyderabad.</div>
+        <div class="special-footer">
+          <div class="special-price">Custom</div>
+          <a href="tel:+918688496208" class="special-order">Call →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <div class="sec-eyebrow reveal">Reviews</div>
+  <div class="sec-title reveal">What Our Guests <em>Say</em></div>
+  <div class="t-grid">
+    <div class="t-card reveal">
+      <div class="t-verified">✓ Zomato Review</div>
+      <div class="t-stars">★★★★★</div>
+      <div class="t-text">"The Gongura Mutton here is the closest thing to my mother's cooking I've ever found in Hyderabad. Absolutely authentic. I come here every Saturday without fail."</div>
+      <div class="t-name">Suresh Reddy</div><div class="t-role">Madhapur · Regular Customer</div>
+    </div>
+    <div class="t-card reveal">
+      <div class="t-verified">✓ Google Review</div>
+      <div class="t-stars">★★★★★</div>
+      <div class="t-text">"We booked Spicy Tradition for our office team lunch. 25 people, everything delivered on time, piping hot and absolutely delicious. The rasam alone was worth it."</div>
+      <div class="t-name">Lakshmi Priya</div><div class="t-role">Banjara Hills · Corporate Client</div>
+    </div>
+    <div class="t-card reveal">
+      <div class="t-verified">✓ Swiggy Review</div>
+      <div class="t-stars">★★★★★</div>
+      <div class="t-text">"The biryani delivery came in 30 mins and tasted like it was made fresh. The portions are generous and pricing is very fair. My go-to for every weekend order."</div>
+      <div class="t-name">Rahul Varma</div><div class="t-role">Kondapur · Delivery Customer</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours-section">
+  <div class="sec-eyebrow reveal">We're Open</div>
+  <div class="sec-title reveal">Visit <em>Anytime</em></div>
+  <div class="hours-grid">
+    <div class="hour-card reveal"><div class="hour-day">Mon – Thu</div><div class="hour-time">7:00 AM – 10:30 PM</div></div>
+    <div class="hour-card reveal"><div class="hour-day">Friday</div><div class="hour-time">7:00 AM – 11:30 PM</div></div>
+    <div class="hour-card reveal"><div class="hour-day">Saturday</div><div class="hour-time">6:30 AM – 11:30 PM</div></div>
+    <div class="hour-card reveal"><div class="hour-day">Sunday</div><div class="hour-time">7:00 AM – 10:00 PM</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left">
+    <div class="sec-eyebrow">Get In Touch</div>
+    <div class="sec-title" style="color:#fff">Visit Us or<br/><em style="color:var(--saffron)">Order Online</em></div>
+    <div class="contact-details">
+      <div class="c-row">
+        <div class="c-icon">📍</div>
+        <div><div class="c-label">Address</div><div class="c-val">Plot 18, Madhapur Main Road<br/>HITEC City, Hyderabad — 500081</div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">📞</div>
+        <div><div class="c-label">Phone</div><div class="c-val"><a href="tel:+918688496208">+91 86884 96208</a></div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">✉️</div>
+        <div><div class="c-label">Email</div><div class="c-val"><a href="mailto:karthikeyanetha7@gmail.com">karthikeyanetha7@gmail.com</a></div></div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">💬</div>
+        <div><div class="c-label">WhatsApp Orders</div><div class="c-val"><a href="https://wa.me/918688496208" target="_blank">+91 86884 96208</a></div></div>
+      </div>
+    </div>
+    <div class="social-row">
+      <a href="https://wa.me/918688496208" target="_blank" class="soc-btn">💬 WhatsApp</a>
+      <a href="mailto:karthikeyanetha7@gmail.com" class="soc-btn">✉️ Email</a>
+      <a href="https://linkedin.com/in/karthikeya-gurram-59209726a" target="_blank" class="soc-btn">💼 LinkedIn</a>
+      <a href="https://github.com/karthikeyanetha1" target="_blank" class="soc-btn">🐙 GitHub</a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="form-title">Send us a Message</div>
+    <form id="contactForm">
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" id="fname" placeholder="Rahul Sharma" required/>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" type="tel" id="fphone" placeholder="+91 98765 43210"/>
+        </div>
+        <div class="form-field full">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" id="femail" placeholder="rahul@gmail.com" required/>
+        </div>
+        <div class="form-field full">
+          <label class="form-label">Message / Reservation Details</label>
+          <textarea class="form-textarea" id="fmsg" placeholder="I'd like to reserve a table for 4 on Saturday evening..." required></textarea>
+        </div>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">Send Message</button>
+      <div class="form-msg" id="formMsg"></div>
+    </form>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-title">Hungry?<br/>Call Us Now.</div>
+  <div class="cta-sub">Dine in, takeaway or delivery — we've got you covered across Hyderabad.</div>
+  <div class="cta-btns">
+    <a href="tel:+918688496208" class="btn-white">📞 Call Now</a>
+    <a href="https://wa.me/918688496208?text=Hi! I want to place an order from Spicy Tradition" target="_blank" class="btn-outline-wh">💬 WhatsApp Order</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Spicy <span>Tradition</span></div>
+      <div class="footer-desc">Authentic Telangana cuisine served with love since 2012. Every dish tells a story from our homeland.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Menu</div>
+      <ul class="footer-links">
+        <li><a href="#menu">Starters</a></li>
+        <li><a href="#menu">Main Course</a></li>
+        <li><a href="#menu">Biryani</a></li>
+        <li><a href="#menu">Desserts</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Visit</div>
+      <ul class="footer-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#specials">Specials</a></li>
+        <li><a href="#contact">Location</a></li>
+        <li><a href="#contact">Catering</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+918688496208">+91 86884 96208</a></li>
+        <li><a href="mailto:karthikeyanetha7@gmail.com">karthikeyanetha7@gmail.com</a></li>
+        <li><a href="https://wa.me/918688496208" target="_blank">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">
+      © 2025 Spicy Tradition. All rights reserved.<br/>
+      Website designed & developed by <a href="https://codewithkweb.com" target="_blank">CodeWithK</a> · <a href="mailto:karthikeyanetha7@gmail.com">karthikeyanetha7@gmail.com</a> · <a href="tel:+918688496208">+91 86884 96208</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// EmailJS
+emailjs.init("3tdUNyiRYlYZmRys7");
+
+document.getElementById('contactForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('formMsg');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  try {
+    await emailjs.send("service_pwkfbys","template_clvsbvr",{
+      from_name: document.getElementById('fname').value,
+      from_email: document.getElementById('femail').value,
+      phone: document.getElementById('fphone').value,
+      website: 'Spicy Tradition Restaurant',
+      message: document.getElementById('fmsg').value,
+    });
+    msg.className='form-msg success';
+    msg.textContent='✅ Message sent! We\'ll get back to you shortly.';
+    msg.style.display='block';
+    this.reset();
+  } catch(err){
+    msg.className='form-msg error';
+    msg.textContent='❌ Failed to send. Please call us directly at +91 86884 96208';
+    msg.style.display='block';
+  }
+  btn.disabled=false;
+  btn.textContent='Send Message';
+});
+
+// Menu filter
+function filterMenu(cat, el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.menu-item').forEach(item=>{
+    item.style.display = (cat==='all'||item.dataset.cat===cat) ? 'flex' : 'none';
+  });
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('show'),i*80);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
